@@ -1,0 +1,5 @@
+{
+  "frontend/src/pages/StatutorySettings.tsx": "Complete statutory settings configuration page with tabs for EPF/ESI rates, state-wise Professional Tax slabs, and Labour Welfare Fund configuration. Allows admins to view and update all Indian labour law statutory deduction parameters with tooltips explaining each field.",
+  "frontend/src/lib/pdfGenerator.ts": "Utility module that generates a professionally formatted payslip PDF by building a complete HTML document with teal/green enterprise styling and opening it in a print window. Exports `generatePayslipPDF` which accepts payslip data and triggers the browser's print dialog (Save as PDF) with a properly titled document.",
+  "frontend/src/pages/PayslipView.tsx": "Payslip view page with employee/month/year selectors, a payslip preview card, and Print + Download PDF action buttons. The Download PDF button calls `generatePayslipPDF` from the new utility, shows an inline spinner loading state during generation, and displays success/error toast notifications via Sonner."
+}

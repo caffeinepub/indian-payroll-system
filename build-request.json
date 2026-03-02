@@ -1,0 +1,44 @@
+{
+  "kind": "build_request",
+  "title": "Add PDF download for payslips",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-10",
+      "text": "Implement client-side PDF generation for payslips so that each employee's monthly payslip can be downloaded as a properly formatted PDF directly from the browser. The PDF must include all payslip sections already rendered in PayslipView.tsx: employee details (name, ID, department, designation), pay period (month/year), earnings breakdown (Basic, HRA, DA, allowances), deductions breakdown (EPF, ESI, PT, LWF, TDS, loan deductions), gross pay, total deductions, and net pay. Add a 'Download PDF' button on the PayslipView page that triggers the PDF download without requiring a backend call.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-3"
+        ],
+        "quotes": [
+          "Would you like to add payslip PDF export so employees can download their monthly salary statements?",
+          "yes please"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A 'Download PDF' button is visible on the PayslipView page alongside the existing Print button.",
+        "Clicking 'Download PDF' generates and downloads a PDF file named in the format 'Payslip_<EmployeeName>_<Month>_<Year>.pdf'.",
+        "The PDF contains all payslip sections: employee info, pay period, earnings table, deductions table, gross pay, total deductions, and net pay.",
+        "The PDF layout is clean and professional, consistent with the existing teal/green enterprise theme.",
+        "PDF generation works entirely client-side with no backend dependency.",
+        "The downloaded PDF renders correctly in standard PDF viewers (Chrome, Adobe Reader, etc.)."
+      ]
+    }
+  ],
+  "constraints": [
+    "PDF generation must be entirely client-side — no backend changes required.",
+    "Do not modify any files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui.",
+    "Preserve all existing payslip data logic and payslip view rendering in PayslipView.tsx."
+  ],
+  "nonGoals": [
+    "Server-side PDF rendering or storage.",
+    "Emailing payslips to employees.",
+    "Bulk PDF export for all employees at once.",
+    "Changes to payslip data calculations or payroll processing logic."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

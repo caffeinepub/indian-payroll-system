@@ -1,0 +1,25 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-03-02T11:07:02.036Z",
+  "summary": "The diff implements client-side PDF generation for payslips as required by REQ-10. A new pdfGenerator.ts utility builds a complete HTML document with teal/green enterprise styling and triggers the browser's print dialog (Save as PDF). The PayslipView.tsx is updated to add a 'Download PDF' button alongside the existing Print button, with loading state and toast notifications. The PDF includes all required payslip sections. One concern is that the PDF generation relies on the browser's print-to-PDF dialog rather than a true programmatic PDF download, which may affect the filename format requirement.",
+  "missing_requirements": [
+    {
+      "id": "REQ-10",
+      "requirement": "Clicking 'Download PDF' generates and downloads a PDF file named in the format 'Payslip_<EmployeeName>_<Month>_<Year>.pdf'.",
+      "reason": "The implementation opens a browser print dialog (window.print()) rather than programmatically downloading a file with a specific filename. The HTML title is set to the desired filename format, but the actual saved filename depends on the browser's print-to-PDF behavior and user input, not a guaranteed auto-download with the specified naming convention.",
+      "evidence": [
+        "frontend/src/lib/pdfGenerator.ts",
+        "frontend-file-summaries.txt"
+      ]
+    }
+  ],
+  "hallucinated_features": [],
+  "confidence": 0.8,
+  "changed_files": [
+    "frontend-file-summaries.txt",
+    "frontend/src/lib/pdfGenerator.ts",
+    "frontend/src/pages/PayslipView.tsx",
+    "project_state.json"
+  ]
+}

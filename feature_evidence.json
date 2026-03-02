@@ -1,0 +1,26 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-implement-client-side-pdf-generation-for-payslips-so-that-each-employee-s-monthly-payslip-can-be-downloaded-as-a-properly-formatted-pdf-directly-from-the-browser-the-pdf-must-include-all-payslip-sections-already-rendered-in-payslipview-tsx-employee-details-name-id-department-designation-pay-period-month-year-earnings-breakdown-basic-hra-da-allowances-deductions-breakdown-epf-esi-pt-lwf-tds-loan-deductions-gross-pay-total-deductions-and-net-pay-add-a-download-pdf-button-on-the-payslipview-page-that-triggers-the-pdf-download-without-requiring-a-backend-call",
+      "featureTitle": "Implement client-side PDF generation for payslips so that each employee's monthly payslip can be downloaded as a properly formatted PDF directly from the browser. The PDF must include all payslip sections already rendered in PayslipView.tsx: employee details (name, ID, department, designation), pay period (month/year), earnings breakdown (Basic, HRA, DA, allowances), deductions breakdown (EPF, ESI, PT, LWF, TDS, loan deductions), gross pay, total deductions, and net pay. Add a 'Download PDF' button on the PayslipView page that triggers the PDF download without requiring a backend call.",
+      "files": [
+        "frontend/src/lib/pdfGenerator.ts",
+        "frontend/src/pages/PayslipView.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-10"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

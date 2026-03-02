@@ -1,0 +1,36 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Add PDF download for payslips",
+  "requirements": [
+    {
+      "id": "REQ-10",
+      "summary": "Implement client-side PDF generation for payslips with a download button that creates a formatted PDF containing all employee details, pay period, earnings, deductions, and net pay",
+      "acceptanceCriteria": [
+        "A 'Download PDF' button is visible on the PayslipView page alongside the existing Print button.",
+        "Clicking 'Download PDF' generates and downloads a PDF file named in the format 'Payslip_<EmployeeName>_<Month>_<Year>.pdf'.",
+        "The PDF contains all payslip sections: employee info, pay period, earnings table, deductions table, gross pay, total deductions, and net pay.",
+        "The PDF layout is clean and professional, consistent with the existing teal/green enterprise theme.",
+        "PDF generation works entirely client-side with no backend dependency.",
+        "The downloaded PDF renders correctly in standard PDF viewers (Chrome, Adobe Reader, etc.)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/package.json",
+          "operation": "modify",
+          "description": "Add jsPDF library as a dependency for client-side PDF generation (e.g., \"jspdf\": \"^2.5.1\"). This library enables creating PDF documents entirely in the browser without server interaction."
+        },
+        {
+          "path": "frontend/src/lib/pdfGenerator.ts",
+          "operation": "create",
+          "description": "Create a utility module that exports a generatePayslipPDF function accepting a payslip data object and returning a Promise that generates and downloads the PDF. The function should use jsPDF to construct a professionally formatted PDF with: a header section showing the company logo from frontend/public/assets/generated/payroll-logo.dim_128x128.png and pay period, employee details table (name, ID, department, designation), earnings breakdown table with component names and amounts, deductions breakdown table with component names and amounts, summary section showing gross pay/total deductions/net pay, and footer with generation timestamp. Apply consistent teal/green theming matching the app's color scheme. Use jsPDF's text, line, and rect methods to create a clean tabular layout. The filename should follow the pattern 'Payslip_<EmployeeName>_<Month>_<Year>.pdf'."
+        },
+        {
+          "path": "frontend/src/pages/PayslipView.tsx",
+          "operation": "modify",
+          "description": "Import the generatePayslipPDF utility from frontend/src/lib/pdfGenerator.ts. Add a new 'Download PDF' button next to the existing Print button in the UI. Wire the button's onClick handler to call generatePayslipPDF with the current payslip data (selectedEmployee, selectedMonth, selectedYear, computed earnings/deductions). Add loading state during PDF generation with appropriate user feedback (e.g., button disabled with 'Generating PDF...' text). Handle any errors from PDF generation gracefully with toast notifications to inform the user if PDF creation fails. Ensure the button is only enabled when a valid payslip is displayed (i.e., when selectedEmployee, selectedMonth, and selectedYear are all set and payslip data exists)."
+        }
+      ]
+    }
+  ]
+}

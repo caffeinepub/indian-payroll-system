@@ -1,0 +1,142 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 5,
+  "summary": "Payroll system for India, incorporating Indian labour laws and Income Tax rules for payroll processing.",
+  "architectural_notes": [
+    "Indian statutory deductions: PF (12% employer + 12% employee on basic+DA), ESI (3.25% employer + 0.75% employee on gross ≤ ₹21,000/month), Professional Tax (state-wise slabs), LWF (state-wise).",
+    "Income Tax: Support both old regime (with exemptions: HRA, 80C, 80D etc.) and new regime (FY 2024-25 slabs); compute monthly TDS and generate Form 16.",
+    "Payroll month-end processing should be idempotent and support re-run/revision before finalisation."
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-create-an-employee-management-module-that-allows-adding-editing-and-deleting-employee-records-including-personal-details-name-date-of-birth-gender-address-employment-details-employee-id-designation-department-date-of-joining-statutory-identifiers-pan-aadhaar-uan-for-pf-esic-number-and-bank-account-details-account-number-ifsc-bank-name",
+      "title": "Create an Employee Management module that allows adding, editing, and deleting employee records including personal details (name, date of birth, gender, address), employment details (employee ID, designation, department, date of joining), statutory identifiers (PAN, Aadhaar, UAN for PF, ESIC number), and bank account details (account number, IFSC, bank name).",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-salary-structure-module-that-allows-defining-per-employee-ctc-breakdown-including-earnings-components-basic-salary-hra-dearness-allowance-special-allowance-conveyance-allowance-medical-allowance-lta-and-deduction-components-employee-pf-esi-professional-tax-lwf-tds-loan-deductions-allow-templates-to-be-created-and-assigned-to-employees",
+      "title": "Create a Salary Structure module that allows defining per-employee CTC breakdown including earnings components (Basic Salary, HRA, Dearness Allowance, Special Allowance, Conveyance Allowance, Medical Allowance, LTA) and deduction components (Employee PF, ESI, Professional Tax, LWF, TDS, loan deductions). Allow templates to be created and assigned to employees.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-statutory-deduction-computation-in-payroll-processing-according-to-current-indian-labour-laws-employee-provident-fund-epf-at-12-of-basic-da-employer-pf-contribution-split-3-67-epf-8-33-eps-employee-state-insurance-esi-at-0-75-of-gross-for-employees-with-gross-21-000-month-employer-esi-at-3-25-professional-tax-as-per-state-wise-slab-allow-configuring-state-slabs-and-labour-welfare-fund-lwf-as-applicable",
+      "title": "Implement Statutory Deduction computation in payroll processing according to current Indian labour laws: Employee Provident Fund (EPF) at 12% of Basic+DA, Employer PF contribution split (3.67% EPF + 8.33% EPS), Employee State Insurance (ESI) at 0.75% of gross for employees with gross ≤ ₹21,000/month (employer ESI at 3.25%), Professional Tax as per state-wise slab (allow configuring state slabs), and Labour Welfare Fund (LWF) as applicable.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-income-tax-tds-computation-supporting-both-the-old-tax-regime-with-exemptions-hra-80c-up-to-1-5l-80d-80g-standard-deduction-50-000-etc-and-the-new-tax-regime-fy-2024-25-slabs-standard-deduction-75-000-allow-each-employee-to-declare-their-preferred-regime-spread-annual-tds-liability-equally-across-remaining-months-of-the-financial-year-support-investment-declaration-inputs-for-80c-80d-hra-exemption-calculation-and-other-common-deductions",
+      "title": "Implement Income Tax (TDS) computation supporting both the Old Tax Regime (with exemptions: HRA, 80C up to ₹1.5L, 80D, 80G, Standard Deduction ₹50,000, etc.) and the New Tax Regime (FY 2024-25 slabs, Standard Deduction ₹75,000). Allow each employee to declare their preferred regime. Spread annual TDS liability equally across remaining months of the financial year. Support investment declaration inputs for 80C, 80D, HRA exemption calculation, and other common deductions.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-monthly-payroll-processing-module-that-allows-running-payroll-for-a-selected-month-and-financial-year-the-module-should-incorporate-attendance-leave-data-paid-days-lop-days-compute-gross-salary-all-statutory-deductions-tds-and-net-pay-for-each-employee-support-approval-workflow-draft-approved-paid-allow-payroll-to-be-locked-after-approval-to-prevent-changes",
+      "title": "Implement a monthly Payroll Processing module that allows running payroll for a selected month and financial year. The module should incorporate attendance/leave data (paid days, LOP days), compute gross salary, all statutory deductions, TDS, and net pay for each employee. Support approval workflow (Draft → Approved → Paid). Allow payroll to be locked after approval to prevent changes.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-leave-and-attendance-management-module-integrated-with-payroll-allow-configuring-leave-types-earned-leave-casual-leave-sick-leave-lop-track-monthly-attendance-per-employee-present-days-leaves-taken-lop-days-feed-lop-days-into-payroll-computation-automatically",
+      "title": "Implement a Leave and Attendance Management module integrated with payroll. Allow configuring leave types (Earned Leave, Casual Leave, Sick Leave, LOP). Track monthly attendance per employee (present days, leaves taken, LOP days). Feed LOP days into payroll computation automatically.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-generate-digital-payslips-for-each-employee-per-payroll-run-payslip-must-display-employee-details-month-year-earnings-breakdown-deductions-breakdown-statutory-income-tax-gross-pay-total-deductions-and-net-pay-allow-downloading-payslips-as-pdf-from-the-browser",
+      "title": "Generate digital payslips for each employee per payroll run. Payslip must display employee details, month/year, earnings breakdown, deductions breakdown (statutory + income tax), gross pay, total deductions, and net pay. Allow downloading payslips as PDF from the browser.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-generate-statutory-compliance-reports-1-pf-ecr-electronic-challan-cum-return-format-showing-uan-employee-name-gross-wages-epf-wages-epf-contribution-eps-contribution-per-employee-2-esi-challan-report-showing-esic-numbers-gross-wages-esi-contributions-3-professional-tax-returns-summary-per-state-4-tds-summary-form-24q-data-per-quarter-showing-employee-pan-taxable-income-tds-deducted-reports-should-be-exportable-as-csv",
+      "title": "Generate statutory compliance reports: (1) PF ECR (Electronic Challan cum Return) format showing UAN, employee name, gross wages, EPF wages, EPF contribution, EPS contribution per employee; (2) ESI Challan report showing ESIC numbers, gross wages, ESI contributions; (3) Professional Tax returns summary per state; (4) TDS summary (Form 24Q data) per quarter showing employee PAN, taxable income, TDS deducted. Reports should be exportable as CSV.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-professional-clean-visual-theme-suited-to-enterprise-payroll-software-use-a-neutral-warm-white-background-with-teal-green-accent-colours-clear-tabular-data-presentation-structured-sidebar-navigation-and-readable-sans-serif-typography-enforce-the-theme-consistently-across-all-modules",
+      "title": "Apply a professional, clean visual theme suited to enterprise payroll software: use a neutral warm-white background with teal/green accent colours, clear tabular data presentation, structured sidebar navigation, and readable sans-serif typography. Enforce the theme consistently across all modules.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-client-side-pdf-generation-for-payslips-so-that-each-employee-s-monthly-payslip-can-be-downloaded-as-a-properly-formatted-pdf-directly-from-the-browser-the-pdf-must-include-all-payslip-sections-already-rendered-in-payslipview-tsx-employee-details-name-id-department-designation-pay-period-month-year-earnings-breakdown-basic-hra-da-allowances-deductions-breakdown-epf-esi-pt-lwf-tds-loan-deductions-gross-pay-total-deductions-and-net-pay-add-a-download-pdf-button-on-the-payslipview-page-that-triggers-the-pdf-download-without-requiring-a-backend-call",
+      "title": "Implement client-side PDF generation for payslips so that each employee's monthly payslip can be downloaded as a properly formatted PDF directly from the browser. The PDF must include all payslip sections already rendered in PayslipView.tsx: employee details (name, ID, department, designation), pay period (month/year), earnings breakdown (Basic, HRA, DA, allowances), deductions breakdown (EPF, ESI, PT, LWF, TDS, loan deductions), gross pay, total deductions, and net pay. Add a 'Download PDF' button on the PayslipView page that triggers the PDF download without requiring a backend call.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Employee management (add/edit/delete employees with PAN, Aadhaar, bank details)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Salary structure setup (basic, HRA, DA, special allowances, deductions)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Payroll processing with Indian labour law compliance (PF, ESI, PT, LWF)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Income Tax computation (old and new tax regime, TDS calculation, Form 16 generation)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Payslip generation and download (PDF)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Leave and attendance management integrated with payroll",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Statutory compliance reports (PF ECR, ESI challan, PT returns)",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Indian Payroll System",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}
